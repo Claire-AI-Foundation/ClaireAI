@@ -1,9 +1,9 @@
 <template>
-  <v-app>
+  <div>
     <router-view/>
     <notifications group="auth" />
     <notifications group="app" />
-  </v-app>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-app>
     <top-bar @toggle-drawer="toggleDrawer"/>
 
     <v-navigation-drawer
@@ -33,8 +33,7 @@
     <v-content>
       <router-view/>
     </v-content>
-
-  </div>
+  </v-app>
 </template>
 
 <script>
