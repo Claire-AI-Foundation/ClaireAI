@@ -14,6 +14,7 @@
 
 <script>
 import Auth from '@/plugins/auth'
+import jwtDecode from 'jwt-decode'
 
 export default {
   methods: {
@@ -37,7 +38,10 @@ export default {
       // eslint-disable-next-line no-undef
       FB.login((facebookResponse) => {
         if (facebookResponse.status === 'connected') {
-          this.onsuccess(facebookResponse.authResponse.accessToken)
+          let resp = facebookResponse.authResponse
+          console.log(jwtDecode(resp.accessToken))
+          // console.log(facebookResponse.authResponse)
+          this.onsuccess(resp.accessToken)
         } else {
           // authFailed()
         }
