@@ -38,12 +38,17 @@ export default {
       // eslint-disable-next-line no-undef
       FB.login((facebookResponse) => {
         if (facebookResponse.status === 'connected') {
-          let resp = facebookResponse.authResponse
-          console.log(jwtDecode(resp.accessToken))
-          // console.log(facebookResponse.authResponse)
-          this.onsuccess(resp.accessToken)
+          try {
+            let resp = facebookResponse.authResponse
+            console.log(jwtDecode(resp.accessToken))
+            // console.log(facebookResponse.authResponse)
+            // this.onsuccess(resp.accessToken)
+          } catch (error) {
+            console.log(error)
+          }
         } else {
           // authFailed()
+          console.log('auth failed')
         }
       })
     },
