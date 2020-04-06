@@ -14,7 +14,7 @@
 
 <script>
 import Auth from '@/plugins/auth'
-import jwtDecode from 'jwt-decode'
+// import jwtDecode from 'jwt-decode'
 
 export default {
   methods: {
@@ -40,7 +40,7 @@ export default {
         if (facebookResponse.status === 'connected') {
           try {
             let resp = facebookResponse.authResponse
-            console.log(jwtDecode(resp.accessToken))
+            console.log({ resp })
             // console.log(facebookResponse.authResponse)
             // this.onsuccess(resp.accessToken)
           } catch (error) {
@@ -50,6 +50,9 @@ export default {
           // authFailed()
           console.log('auth failed')
         }
+      }, {
+        scope: 'email',
+        return_scopes: true
       })
     },
     onsuccess (accessToken) {
