@@ -41,6 +41,10 @@ export default {
           try {
             let resp = facebookResponse.authResponse
             console.log({ resp })
+            // eslint-disable-next-line no-undef
+            FB.api('/me', function (response) {
+              console.log(response)
+            })
             // console.log(facebookResponse.authResponse)
             // this.onsuccess(resp.accessToken)
           } catch (error) {
