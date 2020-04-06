@@ -35,7 +35,7 @@ export default {
     },
     openPopup () {
       // eslint-disable-next-line no-undef
-      FB.login(function (facebookResponse) {
+      FB.login((facebookResponse) => {
         if (facebookResponse.status === 'connected') {
           this.onsuccess(facebookResponse.authResponse.accessToken)
         } else {
