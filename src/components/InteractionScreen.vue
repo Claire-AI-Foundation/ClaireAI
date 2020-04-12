@@ -14,7 +14,7 @@
               >
                 <v-card flat>
                   <v-card-text>
-                    <h3>Hello, I'm Claire</h3>
+                    <h3>Hello {{fname}}, I'm Claire</h3>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                       incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
@@ -47,7 +47,10 @@ export default {
   computed: {
     ...mapGetters([
       'getUser'
-    ])
+    ]),
+    fname () {
+      return this.getUser.name.split(' ')[0]
+    }
   },
   methods: {
     submit () {
