@@ -19,25 +19,40 @@
                         name="name"
                         label="Name"
                         color="primary"
+                        v-model="form.name"
                         v-if="state == 'signup'"
                       ></v-text-field>
                       <v-text-field
                         name="email"
                         label="Email"
                         type="email"
+                        v-model="form.email"
                       >
                       </v-text-field>
                       <v-text-field
                         name="password"
                         label="Password"
+                        v-model="form.password"
                         :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="show ? 'text' : 'password'"
                         @click:append="show = !show"
                       ></v-text-field>
                     </v-card-text>
                     <v-card-actions>
-                      <v-btn color="success" depressed block v-if="state == 'login'">Login</v-btn>
-                      <v-btn color="success" depressed block v-else>Sign Up</v-btn>
+                      <v-btn
+                        color="success" depressed
+                        block v-if="state == 'login'"
+                        :loading="loading"
+                        @click="login">
+                        Login
+                      </v-btn>
+                      <v-btn
+                        color="success" depressed
+                        block v-else
+                        :loading="loading"
+                        @click="signup">
+                        Sign Up
+                      </v-btn>
                     </v-card-actions>
                     <div class="text-center my-4">
                       <span>Or login with</span>
@@ -89,11 +104,18 @@
 <script>
 import GoogleLogin from '@/components/GoogleLogin'
 import FacebookLogin from '@/components/FacebookLogin'
+import Auth from '@/plugins/auth'
 
 export default {
   data: () => ({
     show: false,
-    state: 'login'
+    state: 'login',
+    loading: false,
+    form: {
+      name: '',
+      email: '',
+      password: ''
+    }
   }),
   computed: {
     $bp () {
@@ -105,7 +127,44 @@ export default {
     FacebookLogin
   },
   methods: {
-    //
+    async login () {
+      try {
+        this.loading = true
+        await Auth.login({
+          email: this.form.email,
+          password: this.form.password
+        })
+        this.$router.replace('/')
+      } catch (error) {
+        console.log(error)
+        this.loading = false
+        this.$notify({
+          group: 'auth',
+          title: 'Error',
+          text: error,
+          type: 'error'
+        })
+      }
+    },
+    async signup () {
+      try {
+        this.loading = true
+        await Auth.signup({
+          name: this.form.name,
+          email: this.form.email,
+          password: this.form.password
+        })
+        this.$router.replace('/')
+      } catch (error) {
+        this.loading = false
+        this.$notify({
+          group: 'auth',
+          title: 'Error',
+          text: error,
+          type: 'error'
+        })
+      }
+    }
   }
 }
 </script>

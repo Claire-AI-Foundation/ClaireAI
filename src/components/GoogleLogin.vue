@@ -29,6 +29,7 @@ export default {
       })
     },
     onsuccess (e) {
+      console.log(e)
       Auth.authenticateWithBackend(e.uc.id_token)
         .then((d) => {
           this.$router.push('/')

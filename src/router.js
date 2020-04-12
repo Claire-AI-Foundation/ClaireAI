@@ -27,10 +27,14 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: Home,
       beforeEnter: routeGuard,
       children: [
+        {
+          path: '',
+          name: 'interaction-screen',
+          component: () => import('@/components/InteractionScreen')
+        },
         {
           path: '/settings',
           name: 'settings',

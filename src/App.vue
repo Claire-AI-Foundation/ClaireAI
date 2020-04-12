@@ -3,6 +3,7 @@
     <router-view/>
     <notifications group="auth" />
     <notifications group="app" />
+    <notifications/>
   </div>
 </template>
 

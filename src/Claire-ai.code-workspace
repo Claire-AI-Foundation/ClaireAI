@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "C:\\webdev\\Claire-AI"
+		},
+		{
+			"path": "..\\..\\claire-ai-server"
 		}
 	]
 }
