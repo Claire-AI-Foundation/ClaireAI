@@ -52,6 +52,3 @@ stage2_symptoms = ["Trouble breathing",
 # healthcenter
 # how does this compare to visiting a doctor and complaining of your symptom.
 
-
-
-
