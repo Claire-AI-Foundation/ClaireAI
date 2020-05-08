@@ -86,8 +86,11 @@ export default {
         Object.entries(this.symptoms).map(d => {
           obj[d[0]] = d[1] ? 'yes' : 'no'
         })
-        const resp = await backend().post('/interaction', obj)
-        // console.log(resp.data, this.symptoms)
+
+        const resp = await backend().post('/interaction', {
+          token: this.$store.state.authToken,
+          data: obj
+        })
 
         this.recommendations = resp.data.comments
         this.questions = resp.data.questions
