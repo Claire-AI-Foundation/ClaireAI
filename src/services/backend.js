@@ -1,9 +1,9 @@
 import axios from 'axios'
+import $store from '@/store'
 
-// const vuex = localStorage.getItem('vuex')
 const instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL
-  // headers: { 'Authorization': 'Bearer ' + vuex.authToken }
+  baseURL: process.env.VUE_APP_BASE_URL,
+  headers: { 'Authorization': 'Bearer ' + $store.state.authToken }
 })
 
 export default () => instance

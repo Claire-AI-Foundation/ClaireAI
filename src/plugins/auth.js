@@ -11,8 +11,6 @@ export default {
         name
       })
 
-      console.log({ resp })
-
       $store.dispatch('setUser', resp.data.token)
       return true
     } catch (err) {
@@ -22,9 +20,7 @@ export default {
 
   async signup (payload) {
     try {
-      console.log({ payload })
       const resp = await backend().post('/signup', payload)
-      console.log(resp)
       $store.dispatch('setUser', resp.data.token)
     } catch (err) {
       throw new Error(err.response ? err.response.data.message : err)

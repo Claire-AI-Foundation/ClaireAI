@@ -41,19 +41,20 @@
 
       <v-list dense>
 
-        <v-list-item :to="'/profile'">
-          <v-icon color="success">mdi-account</v-icon>
-          <v-list-item-title style="margin-left:5px;">My Profile</v-list-item-title>
+        <v-list-item>
+          <v-icon class="mr-3">mdi-account-outline</v-icon>
+          <v-list-item-title>My Profile</v-list-item-title>
         </v-list-item>
-        <v-list-item to="/settings">
-          <v-icon color="cyan">mdi-settings</v-icon>
-          <v-list-item-title style="margin-left:5px;">Settings</v-list-item-title>
+        <v-list-item>
+          <v-icon class="mr-3">mdi-cog-outline</v-icon>
+          <v-list-item-title>Settings</v-list-item-title>
         </v-list-item>
 
         <v-divider></v-divider>
 
         <v-list-item @click="$store.dispatch('logout')">
-          <v-list-item-title style="margin-left:5px;">Logout</v-list-item-title>
+          <v-icon class="mr-3">mdi-exit-to-app</v-icon>
+          <v-list-item-title>Logout</v-list-item-title>
         </v-list-item>
       </v-list>
       </v-menu>

@@ -28,6 +28,7 @@
           </v-list-item>
         </template>
       </v-list>
+      <sidebar-footer :mini="mini"></sidebar-footer>
     </v-navigation-drawer>
 
     <v-content>
@@ -38,6 +39,7 @@
 
 <script>
 import TopBar from '@/components/TopBar'
+import SidebarFooter from '@/components/SidebarFooter'
 
 export default {
   name: 'Home',
@@ -49,11 +51,11 @@ export default {
       { icon: 'mdi-home', text: 'Home', link: '/' },
       { icon: 'mdi-heart', text: 'Medical Report', color: 'red' },
       { icon: 'mdi-history', text: 'Medical History' },
-      { icon: 'mdi-account-outline', text: 'Your Profile' },
+      // { icon: 'mdi-account-outline', text: 'Your Profile' },
       { icon: 'mdi-cog-outline', text: 'Settings' },
       { icon: 'mdi-chat-outline', text: 'Send feedback' },
-      { icon: 'mdi-lifebuoy', text: 'Helpline/Emergency' },
-      { icon: 'mdi-information-variant', text: 'About' }
+      { icon: 'mdi-lifebuoy', text: 'Helpline/Emergency', link: '/help' },
+      { icon: 'mdi-information-variant', text: 'About', link: '/about' }
     ]
   }),
   computed: {
@@ -62,7 +64,8 @@ export default {
     }
   },
   components: {
-    TopBar
+    TopBar,
+    SidebarFooter
   },
   methods: {
     toggleDrawer () {
@@ -74,11 +77,6 @@ export default {
         this.mini = !this.mini
       }
     }
-  },
-  mounted () {
-    this.$eventBus.$on('Notify', data => {
-      console.log(data)
-    })
   }
 }
 </script>

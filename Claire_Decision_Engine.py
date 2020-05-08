@@ -1,10 +1,11 @@
 from knowledge_corpus import *
 import ast
 import json
+import sys
 
 
 # output of Claire's D.E:
-inference = {"questions": [], "comments": [], "answers": []}
+inference = {"questions": [], "comments": [], "actions": [], "answers": []}
 
 
 def symptoms_scorer(symptoms_dict):
@@ -41,12 +42,12 @@ pre_recorded_texts = {
                           "care 2": "come back if there are more symptoms",
                           "care 3": "pay a visit to a hospital",
                           "care 4": "where have you been in the past 14 days",
-                          "care 5": "Alert NCDC",
+                          "care 5": "alert_ncdc",
                           "care 6": "self isolate until an infection in confirmed",
-                          "care 7": "play video clip on health guidelines for Covid 19.",
-                          "care 8": "place location marker (amber) on the patient.",
-                          "care 9": "place location marker (red) on the patient.",
-                          "care 10": "place location marker (green) on the patient",
+                          "care 7": "play_health_guidelines_covid_19",
+                          "care 8": "place_location_marker_amber",
+                          "care 9": "place_location_marker_red",
+                          "care 10": "place_location_marker_green",
                           "care 11": "please provide your location history for the past 14 days",
 
                       }
@@ -92,6 +93,12 @@ class Claire(object):
         inference["comments"].append(this_)
 
     @staticmethod
+    def action(this_):
+        """
+        """
+        inference["actions"].append(this_)
+
+    @staticmethod
     def question(this_):
         """
 
@@ -130,25 +137,25 @@ def decision_engine(symptoms_score):
     if stage1_symptom_score == 1/3 and stage2_symptom_score == 0/3:
         Claire.recommend(pre_recorded_texts["care 1"])
         Claire.recommend(pre_recorded_texts["care 2"])
-        Claire.play(pre_recorded_texts["care 7"])
+        Claire.action(pre_recorded_texts["care 7"])
 
     if stage1_symptom_score >= 2/3 and stage2_symptom_score == 0/3:
         Claire.question(pre_recorded_texts["care 11"])
         Claire.recommend(pre_recorded_texts["care 3"])
         Claire.recommend(pre_recorded_texts["care 6"])
-        Claire.recommend(pre_recorded_texts["care 8"])
+        Claire.action(pre_recorded_texts["care 8"])
 
     if stage2_symptom_score >= 1/3:
         Claire.recommend(pre_recorded_texts["care 3"])
         Claire.recommend(pre_recorded_texts["care 1"])
-        Claire.alert("Alert NCDC")
-        Claire.play(pre_recorded_texts["care 7"])
-        Claire.place(pre_recorded_texts["care 8"])
+        Claire.action(pre_recorded_texts["care 5"])
+        Claire.action(pre_recorded_texts["care 7"])
+        Claire.action(pre_recorded_texts["care 8"])
         Claire.question(pre_recorded_texts["care 11"])
 
     if stage1_symptom_score == 0/3 and stage2_symptom_score == 0/3:
         Claire.recommend(pre_recorded_texts["care 2"])
-        Claire.recommend(pre_recorded_texts["care 10"])
+        Claire.action(pre_recorded_texts["care 10"])
 
 
 def main_func(user_input):
@@ -173,15 +180,20 @@ def main_func(user_input):
 # run this program file to understand how main_func(user_input) works.
 # Alternatively read the pdf file "Claire.ai documentation in the project directory
 # ---------------------------------------------------------------------------------
-# # sample user response.
+# sample user response.
 # user_input_ = {
-#                  "Fever": "Yes/No",
-#                  "Cough": "Yes/No",
-#                  "Shortness of breath": "Yes/No",
-#                  "Trouble breathing": "Yes/No",
-#                  "New confusion or inability to arouse": "Yes/No",
-#                  "Bluish lips or face": "Yes/No"
+#                  "Fever": "no",
+#                  "Cough": "no",
+#                  "Shortness of breath": "no",
+#                  "Trouble breathing": "no",
+#                  "New confusion or inability to arouse": "no",
+#                  "Bluish lips or face": "no"
 #                  }
-#
-#
+
+
 # print(main_func(user_input_))
+
+
+j = json.loads(sys.argv[1])
+print(main_func(j))
+sys.stdout.flush()

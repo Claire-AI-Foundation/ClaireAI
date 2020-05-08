@@ -44,6 +44,26 @@ export default new Router({
           path: '/profile',
           name: 'profile',
           component: () => import('@/views/Profile')
+        },
+        {
+          path: '/about',
+          name: 'about-us',
+          component: () => import('@/components/About')
+        },
+        {
+          path: '/help',
+          name: 'helpline',
+          component: () => import('@/components/About')
+        },
+        {
+          path: '/privacy-policy',
+          name: 'privacy',
+          component: () => import('@/components/PrivacyPolicy')
+        },
+        {
+          path: '/terms',
+          name: 'terms',
+          component: () => import('@/components/Terms')
         }
       ]
     },

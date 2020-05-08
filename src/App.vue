@@ -26,4 +26,8 @@ export default {
       background: 'green'
     }
   }
+
+  .text-normal {
+    text-transform: initial !important;
+  }
 </style>
